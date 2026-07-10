@@ -5,6 +5,8 @@ public:
         for(int i=0 ; i<=n ;i++){
             int cnt=0;
             int k =i;
+            if(k/2==0) arr[k]=arr[k/2];
+            else arr[k]=arr[k-1]+1;
             while(k>0){
                 if(k&1==1) cnt++;
                 k=k/2;
