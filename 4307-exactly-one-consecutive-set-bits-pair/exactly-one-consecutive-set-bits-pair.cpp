@@ -5,11 +5,8 @@ public:
         while(n>0){
             if( ((n&1)==1) && ((n>>1)&1)==1 ) {
                 cnt++;
-                n=n>>1;
-            }else{
-                n=n>>1;
             }
-            
+            n=n>>1;
         }
         if(cnt==1) return true;
         else return false;
