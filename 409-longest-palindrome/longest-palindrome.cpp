@@ -11,10 +11,7 @@ public:
         bool hashodd =false;
         for(auto it:hash){
             if(it.second%2 != 0) hashodd = true;
-            if(it.second>=2){
-                if((it.second)%2 == 0) cnt = cnt + it.second;
-                else cnt = cnt + it.second -1 ;
-            }
+            cnt = cnt + (it.second/2)*2;
         }
 
         if(hashodd)  cnt++;
