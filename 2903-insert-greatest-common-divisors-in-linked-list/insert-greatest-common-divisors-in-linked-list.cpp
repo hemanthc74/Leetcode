@@ -18,7 +18,7 @@ public:
         ListNode* curr = head;
         
         while (curr->next) {
-            int gcdVal = std::gcd(curr->val, curr->next->val);
+            int gcdVal = gcd(curr->val, curr->next->val);
             
             curr->next = new ListNode(gcdVal, curr->next);
             curr = curr->next->next; 
