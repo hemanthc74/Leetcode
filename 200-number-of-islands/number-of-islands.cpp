@@ -1,35 +1,23 @@
 class Solution {
-public:
-    void bfs(int row, int col, vector<vector<char>>& grid) {
+private:
+    void dfs(int r, int c, vector<vector<char>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
-        queue<pair<int, int>> q;
         
-        q.push({row, col});
-        grid[row][col] = '0'; 
         
-        int delRow[] = {-1, 1, 0, 0};
-        int delCol[] = {0, 0, -1, 1};
-        
-        while (!q.empty()) {
-            int r = q.front().first;
-            int c = q.front().second;
-            q.pop();
-            
-            for (int i = 0; i < 4; i++) {
-                int newrow = r + delRow[i];
-                int newcol = c + delCol[i];
-                
-                if (newrow >= 0 && newrow < n && newcol >= 0 && newcol < m) {
-                    if (grid[newrow][newcol] == '1') {
-                        grid[newrow][newcol] = '0'; 
-                        q.push({newrow, newcol});
-                    }
-                }
-            }
+        if (r < 0 || r >= n || c < 0 || c >= m || grid[r][c] != '1') {
+            return;
         }
+        
+        grid[r][c] = '0'; 
+        
+        dfs(r - 1, c, grid); 
+        dfs(r + 1, c, grid); 
+        dfs(r, c - 1, grid); 
+        dfs(r, c + 1, grid); 
     }
 
+public:
     int numIslands(vector<vector<char>>& grid) {
         if (grid.empty()) return 0;
         int n = grid.size();
@@ -39,7 +27,7 @@ public:
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (grid[i][j] == '1') {
-                    bfs(i, j, grid);
+                    dfs(i, j, grid);
                     cnt++;
                 }
             }
