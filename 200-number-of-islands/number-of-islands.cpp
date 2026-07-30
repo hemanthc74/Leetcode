@@ -1,12 +1,12 @@
 class Solution {
 public:
-    void bfs(int row, int col, vector<vector<char>> &grid, vector<vector<int>> &vis) {
-        queue<pair<int, int>> q;
+    void bfs(int row, int col, vector<vector<char>>& grid) {
         int n = grid.size();
         int m = grid[0].size();
+        queue<pair<int, int>> q;
         
         q.push({row, col});
-        vis[row][col] = 1;
+        grid[row][col] = '0'; 
         
         int delRow[] = {-1, 1, 0, 0};
         int delCol[] = {0, 0, -1, 1};
@@ -20,12 +20,10 @@ public:
                 int newrow = r + delRow[i];
                 int newcol = c + delCol[i];
                 
-                
                 if (newrow >= 0 && newrow < n && newcol >= 0 && newcol < m) {
-                    
-                    if (grid[newrow][newcol] == '1' && !vis[newrow][newcol]) {
-                        vis[newrow][newcol] = 1;
-                        q.push({newrow, newcol}); 
+                    if (grid[newrow][newcol] == '1') {
+                        grid[newrow][newcol] = '0'; 
+                        q.push({newrow, newcol});
                     }
                 }
             }
@@ -34,22 +32,18 @@ public:
 
     int numIslands(vector<vector<char>>& grid) {
         if (grid.empty()) return 0;
-        
         int n = grid.size();
         int m = grid[0].size();
-        
-        vector<vector<int>> vis(n, vector<int>(m, 0));
-        
         int cnt = 0;
+        
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (grid[i][j] == '1' && vis[i][j] == 0) {
-                    bfs(i, j, grid, vis);
+                if (grid[i][j] == '1') {
+                    bfs(i, j, grid);
                     cnt++;
                 }
             }
         }
-        
         return cnt;
-    }   
+    }
 };
