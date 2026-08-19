@@ -6,10 +6,7 @@ public:
         int mindiff=1e6;
         sort(nums.begin() , nums.end());
         for(int i=0; i<=n-k; i++){
-            int mini=nums[i];
-            int maxi=nums[i+k-1];
-            
-            mindiff=min(mindiff , maxi-mini);
+            mindiff=min(mindiff ,nums[i+k-1]-nums[i] );
         }
 
         return mindiff;
