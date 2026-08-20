@@ -5,7 +5,7 @@ public:
         int left = 0, right = 0;
         int n = fruits.size();
         
-        // Maps fruit_type -> frequency_count in the current window
+        
         unordered_map<int, int> counts;
         
         while (right < n) {
