@@ -4,7 +4,7 @@ public:
         int n=nums.size();
         if(n==0||k<=1) return 0;
         int left=0,right=0,result=0;
-        long long prod=1;
+        int prod=1;
        
         while(right<n){
             prod=prod*nums[right];
