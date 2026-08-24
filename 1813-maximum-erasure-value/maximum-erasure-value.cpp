@@ -1,20 +1,21 @@
 class Solution {
 public:
     int maximumUniqueSubarray(vector<int>& nums) {
-        unordered_set<int> hash;
+        unordered_map<int,int> freq;
         int n = nums.size(), left = 0, sum = 0, maxsum = 0;
 
         for (int right = 0; right < n; right++) {
-            while (hash.count(nums[right])) {
-                hash.erase(nums[left]);
+            freq[nums[right]]++;
+            sum += nums[right];
+
+            while (freq[nums[right]] > 1) {
+                freq[nums[left]]--;
                 sum -= nums[left];
                 left++;
             }
-            hash.insert(nums[right]);
-            sum += nums[right];
+
             maxsum = max(maxsum, sum);
         }
-
         return maxsum;
     }
 };
