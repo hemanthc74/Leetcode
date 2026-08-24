@@ -1,21 +1,21 @@
 class Solution {
 public:
-    int maximumUniqueSubarray(vector<int>& nums) {
-        unordered_map<int,int> freq;
-        int n = nums.size(), left = 0, sum = 0, maxsum = 0;
+    static int maximumUniqueSubarray(vector<int>& nums) {
+        const int n=nums.size();
+        bitset<10001> hasX=0;
+        int ans=0, wsum=0;
 
-        for (int right = 0; right < n; right++) {
-            freq[nums[right]]++;
-            sum += nums[right];
-
-            while (freq[nums[right]] > 1) {
-                freq[nums[left]]--;
-                sum -= nums[left];
-                left++;
+        for (int l=0, r=0; r<n; r++) {
+            const int x=nums[r];
+            while (hasX[x]) {
+                hasX[nums[l]]=0;
+                wsum-=nums[l];
+                l++;
             }
-
-            maxsum = max(maxsum, sum);
+            hasX[x]=1;
+            wsum+=x;
+            ans=max(ans, wsum);
         }
-        return maxsum;
+        return ans;
     }
 };
